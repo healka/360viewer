@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Viewer</title>
+    <!-- Load Pannellum CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+        #panorama {
+            width: 100%;
+            height: 600px; /* Fixed height to allow scrolling */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The container for the viewer -->
+    <div id="panorama"></div>
+
+    <!-- Load Pannellum JS from CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "https://images.squarespace-cdn.com/content/666b1e9b5801013aa6a559a3/3731d7b0-cc9b-47f5-85b1-b622050d38c5/Cam360-001.png?content-type=image%2Fpng", 
+            "autoLoad": true,
+            "autoRotate": -2, // Optional: automatically rotate
+            "compass": false
+        });
+    </script>
+
+</body>
+</html>
