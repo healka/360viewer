@@ -32,7 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     "panorama": imageUrl,
                     "autoLoad": true,
                     "autoRotate": -2,
-                    "compass": false
+                    "compass": false,
+                    "mouseZoom": false,
+                    "draggable": true,
+                    "showZoomCtrl": false,
+                    "showFullscreenCtrl": true
                 });
                 self.unobserve(entry.target);
             }
