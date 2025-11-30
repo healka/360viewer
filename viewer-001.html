@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Viewer - Cam 001</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; overflow: hidden; }
+        #viewer-001 { width: 100%; height: 600px; background-color: #f0f0f0; position: relative; }
+        .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #888; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+<div id="viewer-001">
+    <div class="loader">Loading 360 View...</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var viewerId = 'viewer-001';
+    var imageUrl = 'https://raw.githubusercontent.com/healka/360viewer/master/assets/Cam360-001.png';
+
+    var observer = new IntersectionObserver(function(entries, self) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                pannellum.viewer(viewerId, {
+                    "type": "equirectangular",
+                    "panorama": imageUrl,
+                    "autoLoad": true,
+                    "autoRotate": -2,
+                    "compass": false
+                });
+                self.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "200px" });
+
+    var viewerEl = document.getElementById(viewerId);
+    if (viewerEl) observer.observe(viewerEl);
+});
+</script>
+
+</body>
+</html>
