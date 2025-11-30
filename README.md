@@ -18,6 +18,7 @@ Use a **Code Block** or **Embed Block** and paste the following code. Change the
     height="600" 
     frameborder="0" 
     allowfullscreen 
+    allow="xr-spatial-tracking; gyroscope; accelerometer"
     scrolling="no">
 </iframe>
 ```

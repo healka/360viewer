@@ -22,11 +22,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     var viewerId = 'viewer-002';
     var imageUrl = 'https://raw.githubusercontent.com/healka/360viewer/master/assets/Cam360-002.png';
+    var viewer;
 
     var observer = new IntersectionObserver(function(entries, self) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
-                pannellum.viewer(viewerId, {
+                viewer = pannellum.viewer(viewerId, {
                     "type": "equirectangular",
                     "panorama": imageUrl,
                     "autoLoad": true,
@@ -40,6 +41,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var viewerEl = document.getElementById(viewerId);
     if (viewerEl) observer.observe(viewerEl);
+
+    // iOS 13+ DeviceOrientation permission check
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        var btn = document.createElement('button');
+        btn.textContent = 'Enable Motion Control';
+        btn.style.cssText = 'position:absolute; bottom:10px; left:50%; transform:translateX(-50%); z-index:11; padding:8px 16px; background:rgba(0,0,0,0.6); color:white; border:1px solid white; border-radius:4px; font-family:sans-serif; cursor:pointer;';
+        
+        btn.onclick = function() {
+            DeviceOrientationEvent.requestPermission()
+                .then(function(response) {
+                    if (response === 'granted') {
+                        btn.style.display = 'none';
+                        if (viewer) {
+                            try {
+                                viewer.startOrientation();
+                            } catch (e) {
+                                console.warn('startOrientation not supported');
+                            }
+                        }
+                    } else {
+                        alert('Permission denied for motion controls');
+                    }
+                })
+                .catch(console.error);
+        };
+        
+        document.getElementById(viewerId).appendChild(btn);
+    }
 });
 </script>
 
