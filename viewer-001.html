@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.textContent = 'Enable Motion Control';
         btn.style.cssText = 'position:absolute; bottom:10px; left:50%; transform:translateX(-50%); z-index:9999; padding:10px 20px; background:rgba(0,0,0,0.7); color:white; border:1px solid white; border-radius:4px; font-family:sans-serif; font-size:14px; cursor:pointer; pointer-events:auto;';
         
-        btn.onclick = function(e) {
+        var requestPermission = function(e) {
             e.preventDefault();
             e.stopPropagation();
             
@@ -76,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error(error);
                 });
         };
+        
+        btn.addEventListener('click', requestPermission);
+        btn.addEventListener('touchend', requestPermission);
         
         document.getElementById(viewerId).appendChild(btn);
     }
