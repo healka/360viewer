@@ -29,10 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 viewer = pannellum.viewer(viewerId, {
                     "type": "equirectangular",
                     "panorama": imageUrl,
+                    "hfov": 60,
                     "autoLoad": true,
                     "autoRotate": -2,
                     "compass": false,
-                    "mouseZoom": false,
+                    "mouseZoom": true,
                     "draggable": true,
                     "showZoomCtrl": false,
                     "showFullscreenCtrl": true
